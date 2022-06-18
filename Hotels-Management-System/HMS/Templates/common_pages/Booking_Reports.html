@@ -1,0 +1,105 @@
+
+
+
+
+{%include 'index.html'%}
+
+
+<h1 style = "text-align: center;">Booking Report </h1>
+<br><br><br>
+{% block context %}
+<body>
+
+    <div class="col-8" style="margin: 0 auto;">
+
+<h5 style="color:rgba(7, 53, 64, 0.697)">The list include last 1 month Booking & Refund services</h5>
+        
+        <table Class="table table-striped table-hover">
+            <thead  class="table-dark">
+              <tr >
+                
+                <th scope="col">Booking Date</th>
+                <th scope="col">Number of Dependees</th>
+                <th scope="col">Room Number</th>
+              </tr>
+            </thead>
+            <tbody>
+               
+                <tr>
+                    {%for booking in booking %}
+                  <th scope="row">{{booking.dateOfReservation}} </th>
+                 
+                  <td>{{booking.numOfDep}}</td>
+                  <td>{{booking.roomNumber}}</td>
+                  
+                  </tr>
+                  {%endfor%}
+              </tbody>  
+          </table> 
+    </div>
+    
+    <br><br><br><br><br>
+        <div class="col-8" style="margin: 0 auto;">
+          
+            
+
+
+            {% csrf_token %}
+            {{ form_crispy }}
+
+
+        
+    <canvas id="myChart" width="100" height="50"></canvas>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [{%for booking in booking %} '{{booking.dateOfReservation}}', {% endfor %}],
+        datasets: [{
+            label: 'Number of Dependees',
+                data: [{%for booking in booking %} {{booking.numOfDep}}, {% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                    borderWidth: 1
+        }]
+            },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+        });
+
+        
+    </script>
+
+    <br><br>
+    
+<h4 style="text-align:Center;color: rgb(77, 131, 176);">the total number of Booking Request is : {{Booking_Count}}</h4>
+<h4 style="text-align:Center;color: rgb(202, 110, 44);">Number Of Refund Requests : {{refund_Count}}</h4>
+   
+{% endblock %}
+<br><br><br><br><br><br><br><br><br>
+</div>
+
+
+</body>

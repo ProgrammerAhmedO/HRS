@@ -1,0 +1,332 @@
+<style>
+
+  .row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+    margin: 0 -16px;
+  }
+  
+  .col-25 {
+    -ms-flex: 25%; /* IE10 */
+    flex: 25%;
+  }
+  
+  .col-50 {
+    -ms-flex: 50%; /* IE10 */
+    flex: 50%;
+  }
+  
+  .col-75 {
+    -ms-flex: 75%; /* IE10 */
+    flex: 75%;
+  }
+  
+  .col-25,
+  .col-50,
+  .col-75 {
+    padding: 0 16px;
+  }
+  
+  
+  input[type=text] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  label {
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .icon-container {
+    margin-bottom: 20px;
+    padding: 7px 0;
+    font-size: 24px;
+  }
+  
+  .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    width: 100%;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 17px;
+  }
+  
+  .btn:hover {
+    background-color: #45a049;
+  }
+  
+  span.price {
+    float: right;
+    color: grey;
+  }
+
+  
+  #messages {
+            background-color: grey;
+            color: #fff;
+            padding: 10px;
+            margin-top: 10px;
+        }
+  
+  </style>
+  
+  {% for message in messages %}
+  <p id="messages">{{message}}</p>
+  {% endfor %}
+
+<div class="container">
+
+
+<br><br><br><br>
+    <table class="table table-striped">
+   
+        <tbody >
+          <tr>
+            <th scope="row">You are currently trying to book This room:</th>
+            <td>{{fd}}   </td>
+            <td>{{ld}}</td>
+            
+          </tr>
+          <tr>
+            <th scope="row">Room Number</th>
+            <td>{{ room.number }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">Room capacity</th>
+            <td colspan="2">{{ room.capacity }}</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th scope="row">Number of beds in the room</th>
+            <td colspan="2">{{ room.numberOfBeds }}</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th scope="row">Room Type</th>
+            <td colspan="2">{{ room.roomType }}</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th scope="row">Room price</th>
+            <td colspan="2">{{ room.price }}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br><br>
+         <h3 style="text-align: Center;color:rgb(15, 80, 105)">Your Total price is : {{total}} </h3>
+<br>
+
+{%if room.payment_method.title == 'Visa'%}
+         <div class="card text-center">
+            <div class="card-header">
+              The available payment method is Visa
+            </div>
+            <div class="card-body">
+              <br><br>
+
+<form action="" method="POST">
+  {% csrf_token %}
+<div class="row">
+  <div class="col-75">
+    <div class="container">
+             
+        <div class=row>
+            <input type="hidden" value="{{ room }}" name="roomid">
+            <input type="date" value="{{ fd }}" name="fd" class="d-none">
+            <input type="date" value="{{ ld }}" name="ld" class="d-none">
+
+          <div class="col-50">
+            <h2 style="text-align: Center;">Payment</h2>
+            <br><br>
+            <label for="fname">Accepted Cards</label>
+            <div class="icon-container">
+              <i class="fa fa-cc-visa" style="color:navy;"></i>
+              <i class="fa fa-cc-amex" style="color:blue;"></i>
+              <i class="fa fa-cc-mastercard" style="color:red;"></i>
+              <i class="fa fa-cc-discover" style="color:orange;"></i>
+            </div>
+            <label for="cname">Name on Card</label>
+            <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+            <label for="ccnum">Credit card number</label>
+            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+            <label for="expmonth">Exp Month</label>
+            <input type="text" id="expmonth" name="expmonth" placeholder="September">
+
+            <div class="row">
+              <div class="col-50">
+                <label for="expyear">Exp Year</label>
+                <input type="text" id="expyear" name="expyear" placeholder="2018">
+              </div>
+              <div class="col-50">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" placeholder="352">
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <label>
+          <input type="checkbox" checked="checked" name="sameadr"> Save Visa Card
+        </label>
+        <button type="submit" class="btn btn-info w-100 mt-3" name="bookGuestButton">Book</button>
+      </form>
+    </div>
+  </div>
+  
+  
+            </div>
+            <div class="card-footer text-muted">
+              
+            </div>
+          </div>
+          
+            {%else%}
+            
+            {%endif%}
+
+      {%if room.payment_method.title == 'Visa And Cash'%}
+            <div class="card text-center">
+               <div class="card-header">
+                 The available payment method is Visa or Cash you can Book with any.
+               </div>
+               <div class="card-body">
+                 <br><br>
+   
+   <form action="" method="POST">
+     {% csrf_token %}
+   <div class="row">
+     <div class="col-75">
+       <div class="container">
+                
+           <div class=row>
+               <input type="hidden" value="{{ room }}" name="roomid">
+               <input type="date" value="{{ fd }}" name="fd" class="d-none">
+               <input type="date" value="{{ ld }}" name="ld" class="d-none">
+   
+             <div class="col-50">
+               <h2 style="text-align: Center;">Payment</h2>
+               <br><br>
+               <label for="fname">Accepted Cards</label>
+               <div class="icon-container">
+                 <i class="fa fa-cc-visa" style="color:navy;"></i>
+                 <i class="fa fa-cc-amex" style="color:blue;"></i>
+                 <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                 <i class="fa fa-cc-discover" style="color:orange;"></i>
+               </div>
+               <label for="cname">Name on Card</label>
+               <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+               <label for="ccnum">Credit card number</label>
+               <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+               <label for="expmonth">Exp Month</label>
+               <input type="text" id="expmonth" name="expmonth" placeholder="September">
+   
+               <div class="row">
+                 <div class="col-50">
+                   <label for="expyear">Exp Year</label>
+                   <input type="text" id="expyear" name="expyear" placeholder="2018">
+                 </div>
+                 <div class="col-50">
+                   <label for="cvv">CVV</label>
+                   <input type="text" id="cvv" name="cvv" placeholder="352">
+                 </div>
+               </div>
+             </div>
+   
+           </div>
+           <label>
+             <input type="checkbox" checked="checked" name="sameadr"> Save Visa Card
+           </label>
+           <button type="submit" class="btn btn-info w-100 mt-3" name="bookGuestButton">Book</button>
+           
+           
+         </form>
+       </div>
+     </div>
+     
+     
+               </div>
+               <div class="card-footer text-muted">
+                 
+               </div>
+             </div>
+             <h4 style="text-align: Center;color:brown">for the record , you can pay Cash</h4>
+               {%else%}
+               
+               {%endif%}
+            <br><br><br><br>
+
+<br> <br>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class=row>
+            <input type="hidden" value="{{ room }}" name="roomid">
+            <input type="date" value="{{ fd }}" name="fd" class="d-none">
+            <input type="date" value="{{ ld }}" name="ld" class="d-none">
+
+            {% if room.capacity > 1 %}
+            
+            <div class="col-6">
+                
+                <h4>Add Dependee</h4>
+                <input type="text" class="form-control d-inline" name="depName">
+                <button type="submit" name="add"
+                    class="form-control btn btn-sm btn-outline-success px-3 d-inline">Add</button>
+            </div>
+
+            <div class="col-6">
+                <ul id="myList" class="list-group">
+                    <h4>List Of Dependees</h4>
+                    {% for n in names %}
+                    <li class="list-group-item">{{n}}<input type="hidden" name="name{{forloop.counter}}" value="{{n}}">
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if role == "receptionist" %}
+
+            <label for="exampleFormControlSelect1">Select A Guest
+            </label>
+            <select class="form-control" name="guest" required="" id="id_guest">
+                {% for guest in guests %}
+                <option value="{{guest.id}}">{{guest.user.first_name}} {{guest.user.last_name}}</option>
+                {% endfor %}
+            </select>
+            {% endif %}
+
+
+
+            {%if room.payment_method.title == 'Cash' %}
+           
+            <button type="submit" class="btn btn-info w-100 mt-3" name="bookGuestButton">Book</button>
+
+            <p style="text-align: Center;color:brown">The available payment method is Cash</p>
+
+
+
+            {% endif %}
+        </div>
+    </form>
+   
+
+    <div class="py-3">
+        &nbsp
+    </div>
+
+</div>

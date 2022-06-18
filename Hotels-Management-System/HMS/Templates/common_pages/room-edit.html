@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="shadow-lg p-5">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="row mt-5">
+                <div class="col-6">
+
+                    <div class="form-group">
+                        <label for="item-quantity"><b>Number Of Beds: </b></label>
+                        <input type="number" min="0" class="form-control border border-secondary"
+                            value="{{room.numberOfBeds}}" id="id_numberOfBeds" name="numberOfBeds">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="item-quantity"><b>Price: </b></label>
+                        <input type="number" min="0" step="0.01" class="form-control border border-secondary"
+                            value="{{room.price}}" id="id_price" name="price">
+                    </div>
+                    <div class="form-group">
+                        <label for="item-quantity"><b>Payment Method</b></label>
+                        <select name="payment_method" required="" id="item-quantity"
+                            class="form-control border border-secondary">
+    
+                            <option value="VISA" {% if room.payment_method == 'VISA' %} selected="" {% endif %}>Visa</option>
+    
+                            <option value="Cash" {% if room.payment_method == 'Cash' %} selected="" {% endif %}>Cash
+                            </option>
+    
+                            <option value="Visa and Cash" {% if room.payment_method == 'Visa and Cash' %} selected="" {% endif %}>Visa and Cash
+                            </option>
+                        </select>
+                    
+                        </div>
+                    <!-- <div class="form-group ">
+                        <label for="item-type"><b>Payment Method available : </b></label>
+                        <input type="text" min="1" class="form-control border border-secondary"
+                            value="{{room.payment_method}}" id="id_payment_method" name="payment_method">
+                    </div> -->
+                </div>
+
+                <div class="col-6">
+
+                    <div class="form-group ">
+                        <label for="item-type"><b>Capacity : </b></label>
+                        <input type="number" min="1" class="form-control border border-secondary"
+                            value="{{room.capacity}}" id="id_capacity" name="capacity">
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="item-type"><b>Hotel Name : </b></label>
+                        <input type="text" min="1" class="form-control border border-secondary"
+                            value="{{room.hotel}}" id="id_Hotel_Name" name="hotel">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="item-quantity"><b>Room Type</b></label>
+                        <select name="roomType" required="" id="id_roomType"
+                            class="form-control border border-secondary">
+
+                            <option value="King" {% if room.roomType == 'King' %} selected="" {% endif %}>King</option>
+
+                            <option value="Luxury" {% if room.roomType == 'Luxury' %} selected="" {% endif %}>Luxury
+                            </option>
+
+                            <option value="Normal" {% if room.roomType == 'Normal' %} selected="" {% endif %}>Normal
+                            </option>
+
+                            <option value="Economic" {% if room.roomType == 'Economic' %} selected="" {% endif %}>Economic
+                            </option>
+
+                        </select>
+                    </div>
+                    <button type="submit" name="submit" class="btn btn-outline-success float-right">Save
+                        Changes</button>
+                </div>
+
+            </div>
+        </form>
+        <br>
+
+
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="container py-5">
+
+    <div class="table-responsive">
+        <div class="table-header row">
+
+            <div class="col-sm-12 col-md-12 col-lg-4 mb-4">
+                <h2>Room Services</h2>
+                <span class="text-muted">The list include last 1 month room services</span>
+            </div>
+
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <th><h3 style="color:rgb(11, 46, 67);">Guest</h3></th>
+                        <!-- <th>Guest Name<input type="text" disabled name= "Name"  class="form-control border border-secondary"></th> -->
+                        <th>Room Number<input type="text" name= "Number" class="form-control border border-secondary"></th>
+                        <th>Type<input type="text" name= "Type" class="form-control border border-secondary"></th>
+                        <th>Created Date<input type="date" name= "Date" class="form-control border border-secondary"></th>
+                        <th>Price<input type="text" name= "Price" class="form-control border border-secondary"></th>
+                        <th><button type="submit" name="filter"  class="btn btn-warning">Filter</button></th>
+                    </form>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rs in room_services %}
+                <tr>
+                    <td><a
+                            href="{% url 'guest-profile' rs.curBooking.guest.user.id %}">{{rs.curBooking.guest.user.first_name}}</a>
+                    </td>
+                    <td><a href="{% url 'room-profile' rs.room.number %}">{{rs.room.number}}</a></td>
+                    <td>{{rs.servicesType}}</td>
+                    <td>{{rs.createdDate}}</td>
+                    <td>{{rs.price}}</td>
+                    <!-- url 'room-services' RoomServices.id -->
+                    <!-- <td> <a href="" class="btn btn-sm btn-danger px-3">Delete</a></td> -->
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

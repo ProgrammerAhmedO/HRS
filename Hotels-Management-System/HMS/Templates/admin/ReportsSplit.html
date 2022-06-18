@@ -1,0 +1,98 @@
+
+{%include 'index.html'%}
+
+<style>
+
+div { position: relative; }
+.hyperspan {
+    position:absolute;
+    width:100%;
+    height:100%;
+    left:0;
+    top:0;
+}
+</style>
+
+
+<body>
+    <!-- <h1 style="text-align: center;color:#1baf7b"> Monthly Reports</h1> -->
+    {% block context %}
+<!-- <div id="music" class="col-md-6" class="nav" style="background-color: skyblue;">Music I Like 
+    <a href="http://www.google.com"> 
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <span class="hyperspan"></span>
+    </a>   
+</div>
+<br>
+
+<div id="music" class="col-md-6" class="nav" style="background-color: rgb(196, 234, 60);">Music I Like 
+    <a href="http://www.google.com"> 
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <span class="hyperspan"></span>
+    </a>   
+</div>
+
+
+<div id="music" class="col-md-6" class="nav" style="background-color: rgb(196, 234, 60);">Music I Like 
+    <a href="http://www.google.com"> 
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <span class="hyperspan"></span>
+    </a>   
+</div>
+ -->
+
+<div class=row>
+    <div class="col-5" style="background-color: #4287e8;margin: 0 auto;"  id="music">
+        <br><br><br><br>
+        <h1 style="text-align: center">Storage Reports</h1>
+        <a href="{% url 'Storage_Reports'%}"> 
+            <br><br><br><br>
+            <span class="hyperspan"></span>
+        </a>   
+    
+    </div>
+    <br>
+        <div class="col-5" style="background-color: #004B5A;margin: 0 auto;"  id="music">
+            <br><br><br><br>
+        <h1 style="text-align: center">Booking Reports </h1>
+        
+      
+            <a href="{% url 'Booking_Reports'%}"> 
+                <br><br><br><br>
+                <span class="hyperspan"></span>
+            </a>   
+
+
+    </div>
+
+</div>
+
+
+<br>
+<div class=row>
+    <div class="col-5" style="background-color: #F6C76F;margin: 0 auto;"  id="music">
+        <br><br><br><br>
+        <h1 style="text-align: center">Events Reports</h1>
+        <a href="{% url 'Event_Reports'%}"> 
+            <br><br><br><br>
+           <span class="hyperspan"></span>
+        </a>   
+    
+    </div>
+    <br>
+        <div class="col-5" style="background-color: #ED4534;margin: 0 auto;"  id="music">
+            <br><br><br><br>
+        <h1 style="text-align: center">Services Reports</h1>
+            <a href="{% url 'Services_Reports'%}"> 
+                <br><br><br><br>
+                <span class="hyperspan"></span>
+            </a>   
+
+
+    </div>
+
+</div>
+<br>
+{% endblock %}
+<br><br><br>
+</body>
